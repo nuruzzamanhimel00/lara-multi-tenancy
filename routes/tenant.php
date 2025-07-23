@@ -23,7 +23,10 @@ Route::middleware([
     InitializeTenancyByDomain::class,
     PreventAccessFromCentralDomains::class,
 ])->group(function () {
-    Route::get('/', function () {
+    Route::get('/tenant/', function () {
         return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
+    });
+        Route::get('/tenant-login', function(){
+        dd('This is the tenant login page');
     });
 });

@@ -17,7 +17,7 @@ class PreventTenantAccessToCentral
     {
         $centralDomains = config('tenancy.central_domains');
         $host = $request->getHost();
-        // dd($host, tenancy()->initialized);
+        // dd($host);
 
         // If current host is central AND a tenant is identified => block
         if (!in_array($host, $centralDomains)) {
