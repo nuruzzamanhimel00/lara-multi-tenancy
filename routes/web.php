@@ -5,7 +5,7 @@ use App\Http\Controllers\TenantController;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
-    dd('dd');
+
     return view('welcome');
 });
 
