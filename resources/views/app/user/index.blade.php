@@ -28,7 +28,7 @@
                                 <td>{{$user->email}}</td>
                                 {{-- <td>{{$user->domains->pluck('domain')->implode(', ')}}</td> --}}
                                 <td>
-                                    <a href="{{route('tenant.users.edit', $user->id)}}" class="btn btn-primary">Edit</a>
+                                    <a href="{{route('tenant.users.edit', $user)}}" class="btn btn-primary">Edit</a>
                                     <a href="{{route('tenant.users.destroy', $user->id)}}" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
