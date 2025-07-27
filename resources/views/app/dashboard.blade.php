@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     {{ __("You're logged in!") }}
-                    <a href="{{route('tenants.index')}}" class="btn btn-primary">Tenants</a>
+                    <a href="{{route('tenant.users.index')}}" class="btn btn-primary">Users</a>
                 </div>
             </div>
         </div>

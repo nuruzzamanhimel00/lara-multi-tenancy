@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TenantController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\App\UserController;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 
@@ -20,6 +21,8 @@ use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 |
 */
 
+
+
 Route::middleware([
     'web',
     InitializeTenancyByDomain::class,
@@ -27,10 +30,9 @@ Route::middleware([
 ])->prefix('tenant')->name('tenant.')->group(function () {
     Route::get('/', function () {
         return view("app.welcome");
-    });
+    })->name('welcome');
 
     Route::middleware(['auth'])->group(function () {
-
         Route::get('/dashboard', function () {
             return view('app.dashboard');
         })->middleware(['verified'])->name('dashboard');
@@ -39,8 +41,14 @@ Route::middleware([
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-        Route::resource('users', TenantController::class);
+        Route::resource('users', UserController::class);
     });
 
     require __DIR__.'/tenant-auth.php';
+
+    // Catch-all route: redirect any unmatched URL to tenant.welcome
+    Route::any('{any}', function () {
+
+        return redirect()->route('tenant.welcome');
+    })->where('any', '.*');
 });

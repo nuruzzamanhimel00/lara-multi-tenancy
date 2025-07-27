@@ -6,19 +6,20 @@ use App\Models\Tenant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 
-class TenantController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $tenants = Tenant::with('domains')
+        $users = User::query()
         ->latest()
         ->get();
 
-        return view("tenant.index", compact('tenants'));
+        return view("app.user.index", compact('users'));
     }
 
     /**
@@ -26,7 +27,7 @@ class TenantController extends Controller
      */
     public function create()
     {
-        return view("tenant.create");
+        return view("app.user.create");
     }
 
     /**
@@ -41,7 +42,7 @@ class TenantController extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        $tenant = Tenant::create($validated);
+        $tenant = User::create($validated);
         $tenant->domains()->create(['domain' => $validated['domain_name'].'.'.config('app.domain')]);
 
         $tenant->run(function () {

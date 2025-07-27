@@ -21,7 +21,8 @@ class PreventTenantAccessToCentral
 
         // If current host is central AND a tenant is identified => block
         if (!in_array($host, $centralDomains)) {
-        abort(403, 'Tenant users are not allowed to access the central domain.');
+        // abort(403, 'Tenant users are not allowed to access the central domain.');
+            return redirect()->route('tenant.welcome');
         }
         return $next($request);
     }

@@ -16,20 +16,20 @@
                             <th scope="col">#</th>
                             <th scope="col">Name</th>
                             <th scope="col">email</th>
-                            <th scope="col">Domain</th>
+                            {{-- <th scope="col">Domain</th> --}}
                             <th scope="col">Action</th>
                           </tr>
                         </thead>
                         <tbody>
-                            @foreach($tenants as $tenant)
+                            @foreach($users as $user)
                             <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
-                                <td>{{$tenant->name}}</td>
-                                <td>{{$tenant->email}}</td>
-                                <td>{{$tenant->domains->pluck('domain')->implode(', ')}}</td>
+                                <td>{{$user->name}}</td>
+                                <td>{{$user->email}}</td>
+                                {{-- <td>{{$user->domains->pluck('domain')->implode(', ')}}</td> --}}
                                 <td>
-                                    <a href="{{route('tenants.edit', $tenant->id)}}" class="btn btn-primary">Edit</a>
-                                    <a href="{{route('tenants.destroy', $tenant->id)}}" class="btn btn-danger">Delete</a>
+                                    <a href="{{route('tenant.users.edit', $user->id)}}" class="btn btn-primary">Edit</a>
+                                    <a href="{{route('tenant.users.destroy', $user->id)}}" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
                           @endforeach
