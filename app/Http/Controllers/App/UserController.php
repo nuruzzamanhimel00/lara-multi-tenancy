@@ -37,19 +37,13 @@ class UserController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'domain_name' => 'required|string|max:255|unique:domains,domain',
-            'email' => 'required|email|max:255',
+            'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        $tenant = User::create($validated);
-        $tenant->domains()->create(['domain' => $validated['domain_name'].'.'.config('app.domain')]);
+        $user = User::create($validated);
 
-        $tenant->run(function () {
-            // ...
-        });
-
-        return redirect()->route('tenants.index');
+        return redirect()->route('tenant.users.index');
     }
 
     /**

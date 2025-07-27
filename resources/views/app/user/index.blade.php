@@ -2,7 +2,7 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
-            <a href="{{route('tenants.create')}}" class="btn btn-primary">Create Tenant</a>
+            <a href="{{route('tenant.users.create')}}" class="btn btn-primary">Create User</a>
         </h2>
     </x-slot>
 
