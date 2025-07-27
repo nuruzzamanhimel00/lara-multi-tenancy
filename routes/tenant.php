@@ -24,21 +24,16 @@ Route::middleware([
     'web',
     InitializeTenancyByDomain::class,
     PreventAccessFromCentralDomains::class,
-])->prefix('tenant')->group(function () {
+])->prefix('tenant')->name('tenant.')->group(function () {
     Route::get('/', function () {
-        // return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
         return view("app.welcome");
     });
-    // Route::get('/login', function(){
-    //     dd('This is the tenant login page');
-    // })->name('tenant.login');
-
 
     Route::middleware(['auth'])->group(function () {
 
         Route::get('/dashboard', function () {
             return view('app.dashboard');
-        })->middleware([ 'verified'])->name('dashboard');
+        })->middleware(['verified'])->name('dashboard');
 
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -48,6 +43,4 @@ Route::middleware([
     });
 
     require __DIR__.'/tenant-auth.php';
-
-
 });
